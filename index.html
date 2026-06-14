@@ -217,10 +217,10 @@ footer .copy{font-size:12px;color:var(--ink-soft);line-height:1.7}
     <p data-k="ch_p">자본소득이 노동소득을 넘으면 베짱이! 소득을 넣고 내 투자 캐릭터를 확인해보세요.</p>
   </div>
   <div class="card">
-    <div style="display:flex;justify-content:center;margin-bottom:18px"><div class="mtog"><button id="chKR" class="on" data-k="mk_kr_btn">🇰🇷 한국주식</button><button id="chUS" data-k="mk_us_btn">🇺🇸 미국주식</button></div></div>
+    <div style="display:flex;justify-content:center;gap:10px;margin-bottom:18px;flex-wrap:wrap"><div class="mtog"><button id="chKR" class="on" data-k="mk_kr_btn">🇰🇷 한국주식</button><button id="chUS" data-k="mk_us_btn">🇺🇸 미국주식</button></div><div class="mtog"><button id="chWon" class="on">₩ 원화</button><button id="chUsd">$ 달러</button></div></div>
     <div class="ch-inputs">
-      <div class="field"><label data-k="ch_labor">💼 노동소득</label><input id="labor" type="number" min="0" data-ph="월 또는 연 (같은 기준)"></div>
-      <div class="field"><label data-k="ch_capital">📈 자본소득</label><input id="capital" type="number" min="0" data-ph="월 또는 연 (같은 기준)"></div>
+      <div class="field"><label id="lblLabor" data-k="ch_labor">💼 노동소득</label><input id="labor" type="number" min="0" data-ph="월 또는 연 (같은 기준)"></div>
+      <div class="field"><label id="lblCapital" data-k="ch_capital">📈 자본소득</label><input id="capital" type="number" min="0" data-ph="월 또는 연 (같은 기준)"></div>
     </div>
     <button class="btn" id="chBtn" data-k="ch_btn">내 캐릭터 보기</button>
     <div id="charResult"></div>
@@ -265,7 +265,7 @@ footer .copy{font-size:12px;color:var(--ink-soft);line-height:1.7}
 <script>
 /* ===== CONFIG ===== */
 const API_BASE="";const MODEL="claude-sonnet-4-6";
-const FORM_ENDPOINT="https://formspree.io/f/xxxx"; // 예: https://formspree.io/f/xxxxxx (비우면 데모 모드)
+const FORM_ENDPOINT="https://formspree.io/f/mwvjalwk"; // 대기자·이름투표 수신
 
 /* ===== analytics ===== */
 function track(name,props){try{
@@ -360,7 +360,7 @@ function applyLang(){document.documentElement.lang=LANG;
   stock.placeholder=t('ph_stock');thesis.placeholder=t('ph_thesis');wlEmail.placeholder=t('ph_email');
   mNews.placeholder=t('ph_mnews');mThesis.placeholder=t('ph_mthesis');$('nvCustom').placeholder=t('ph_nv');
   $('labor').placeholder=t('ph_inc');$('capital').placeholder=t('ph_inc');
-  langBtn.textContent=LANG==='ko'?'EN':'한국어';renderList();renderNV();}
+  langBtn.textContent=LANG==='ko'?'EN':'한국어';renderList();renderNV();updateChCur();}
 langBtn.onclick=()=>{LANG=LANG==='ko'?'en':'ko';applyLang();track('lang_toggle',{lang:LANG});};
 
 /* ===== helpers ===== */
@@ -590,6 +590,11 @@ Return ONLY JSON: {"impact":"risk|long_term_ok|ambiguous|noise","why":"2-3 sente
 let CHMKT='KR';
 $('chKR').onclick=()=>{CHMKT='KR';$('chKR').classList.add('on');$('chUS').classList.remove('on');};
 $('chUS').onclick=()=>{CHMKT='US';$('chUS').classList.add('on');$('chKR').classList.remove('on');};
+let CHCUR='KRW';
+function chSym(){return CHCUR==='USD'?'$':'₩';}
+function updateChCur(){const l=$('lblLabor'),c=$('lblCapital');if(l)l.textContent=t('ch_labor')+' ('+chSym()+')';if(c)c.textContent=t('ch_capital')+' ('+chSym()+')';}
+$('chWon').onclick=()=>{CHCUR='KRW';$('chWon').classList.add('on');$('chUsd').classList.remove('on');updateChCur();};
+$('chUsd').onclick=()=>{CHCUR='USD';$('chUsd').classList.add('on');$('chWon').classList.remove('on');updateChCur();};
 function flagBadge(m){
  if(m==='US')return `<g transform="translate(89,150)"><rect width="34" height="22" rx="3" fill="#b22234" stroke="#fff" stroke-width="1.5"/>${[0,1,2,3].map(i=>`<rect y="${3.2+i*4.4}" width="34" height="2.1" fill="#fff"/>`).join('')}<rect width="15" height="12" fill="#3c3b6e"/>${[0,1,2,3,4,5].map(i=>`<circle cx="${3+(i%3)*5}" cy="${3.5+Math.floor(i/3)*5}" r="1.1" fill="#fff"/>`).join('')}</g>`;
  return `<g transform="translate(89,150)"><rect width="34" height="22" rx="3" fill="#fff" stroke="#e6e8ec" stroke-width="1.5"/><clipPath id="tkc"><circle cx="17" cy="11" r="6.2"/></clipPath><g clip-path="url(#tkc)"><rect x="10" y="4" width="14" height="7" fill="#cd2e3a"/><rect x="10" y="11" width="14" height="7" fill="#0047a0"/></g><g stroke="#222" stroke-width="0.9" stroke-linecap="round"><path d="M5 6 L8.5 6"/><path d="M5 16 L8.5 16"/><path d="M25.5 6 L29 6"/><path d="M25.5 16 L29 16"/></g></g>`;
@@ -608,7 +613,9 @@ $('chBtn').onclick=function(){
  const desc=cr==='grasshopper'?t('ch_hopper_desc'):t('ch_ant_desc');
  const lbl=cr==='grasshopper'?t('ch_achieved'):t('ch_ratio').replace('{p}',pctStr);
  $('charResult').innerHTML=`<div class="ch-card">${characterSVG(cr,CHMKT)}
-   <div class="ch-title">${title}</div><div class="ch-desc">${desc}</div>
+   <div class="ch-title">${title}</div>
+   <div style="font-size:12.5px;color:var(--ink-soft);font-weight:700;margin-top:4px">💼 ${chSym()}${L.toLocaleString()} · 📈 ${chSym()}${C.toLocaleString()}</div>
+   <div class="ch-desc">${desc}</div>
    <div class="ch-bar"><i style="width:${Math.min(pct,100)}%"></i></div><div class="ch-bar-lbl">${lbl}</div>
    <div class="ch-actions"><button class="btn" id="chShare">${t('ch_share')}</button><button class="btn ghost" id="chCta">${t('ch_cta')}</button></div></div>`;
  track('character_run',{creature:cr,market:CHMKT,pct:Math.min(pct,999)});
