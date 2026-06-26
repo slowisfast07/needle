@@ -280,7 +280,7 @@ footer .copy{font-size:12px;color:var(--ink-soft);line-height:1.7}
 <section class="waitlist view" id="preorder">
   <div class="wl-card" id="wlCard">
     <div class="price-tag"><span class="price-now" data-k="pre_now">첫 달 무료</span><span class="price-badge" data-k="pre_badge">얼리버드</span></div>
-    <div class="price-sub" data-k="pre_sub">이후 월 9,900원 자동결제 · 언제든 해지 가능</div>
+    <div class="price-sub" data-k="pre_sub">이후 월 9,900원 예정 · 결제는 출시 시 별도 동의 · 언제든 해지</div>
     <h3 data-k="wl_h">매일 아침, 자동 브리핑을 받아보세요</h3>
     <p data-k="wl_p">정식 버전은 저장해둔 종목을 매일 아침 자동 분석해 검증된 핵심 뉴스만 한 통으로 보내드려요. 지금 사전예약하면 얼리버드 가격으로 가장 먼저 시작할 수 있어요.</p>
     <div class="wl-form">
@@ -308,7 +308,7 @@ footer .copy{font-size:12px;color:var(--ink-soft);line-height:1.7}
 <footer>
   <div class="brand" data-view="home" style="justify-content:center"><span class="ic" style="width:24px;height:24px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9 11l3.5 3.5L21 6"/><path d="M16 6h5v5"/></svg></span>Needle</div>
   <div class="copy" data-k="foot" style="margin-top:14px">노이즈를 거르고, 펀더멘탈을 흔드는 뉴스만 · © 2026 Needle. Beta.<br>모든 콘텐츠는 정보 제공 목적이며 투자 자문·매매 권유가 아닙니다. 이메일은 출시 알림 용도로만 사용됩니다.</div>
-  <div class="foot-links"><a data-view="namevote" data-k="fl_name">이름 투표</a><a data-view="feedback" data-k="fl_fb">의견 보내기</a></div>
+  <div class="foot-links"><a data-view="namevote" data-k="fl_name">이름 투표</a><a data-view="feedback" data-k="fl_fb">의견 보내기</a><a href="/privacy">개인정보처리방침</a><a href="/terms">이용약관</a></div>
 </footer>
 
 <div class="toast" id="toast"></div>
@@ -368,11 +368,11 @@ const T={ko:{
  ch_ratio:"자본소득이 노동소득의 {p}",ch_achieved:"🎉 베짱이 달성! 자본소득이 노동소득을 넘었어요",
  ch_share:"결과 공유",ch_cta:"→ 내 종목 뉴스도 점검",ch_share_copied:"공유 문구를 복사했어요!",ch_share_txt:"[Needle] 나는 {title}! 자본소득이 노동소득의 {p} · 너의 투자 캐릭터는?",ph_inc:"예: 3000만, 1억 (숫자도 OK)",
  wl_h:"매일 아침, 자동 브리핑을 받아보세요",wl_p:"정식 버전은 저장해둔 종목을 매일 아침 자동 분석해 검증된 핵심 뉴스만 한 통으로 보내드려요. 지금 예약하면 첫 달은 무료로 시작할 수 있어요.",
- wl_btn:"첫 달 무료로 시작",wl_consent:"첫 달 무료 후 월 9,900원 자동결제 · 출시 알림을 위한 이메일 수집에 동의합니다.",
+ wl_btn:"첫 달 무료로 시작",wl_consent:"출시 시 월 9,900원(첫 달 무료) 예정 · 출시 알림을 위한 이메일 수집에 동의합니다.",
  nav_watch:"오늘의 브리핑",nav_manual:"뉴스 점검",nav_char:"투자 캐릭터",nav_pre:"사전예약",
  fl_name:"이름 투표",fl_fb:"의견 보내기",
- pre_now:"첫 달 무료",pre_badge:"얼리버드",pre_sub:"이후 월 9,900원 자동결제 · 언제든 해지 가능",hc_th_label:"📜 내 투자 근거",
- wl_need_email:"올바른 이메일을 입력해 주세요.",wl_need_consent:"자동결제·이메일 수집 동의에 체크해 주세요.",wl_done:"✓ 예약 완료! 출시되면 첫 달 무료로 가장 먼저 시작하실 수 있게 알려드릴게요.",
+ pre_now:"첫 달 무료",pre_badge:"얼리버드",pre_sub:"이후 월 9,900원 예정 · 결제는 출시 시 별도 동의 · 언제든 해지",hc_th_label:"📜 내 투자 근거",
+ wl_need_email:"올바른 이메일을 입력해 주세요.",wl_need_consent:"이메일 수집 동의에 체크해 주세요.",wl_done:"✓ 예약 완료! 출시되면 첫 달 무료로 가장 먼저 시작하실 수 있게 알려드릴게요.",
  foot:"노이즈를 거르고, 펀더멘탈을 흔드는 뉴스만 · © 2026 Needle. Beta.<br>모든 콘텐츠는 정보 제공 목적이며 투자 자문·매매 권유가 아닙니다. 이메일은 출시 알림 용도로만 사용됩니다.",
  ph_stock:"예: NVDA, IREN, 엔비디아",ph_thesis:"예) AI 데이터센터 전력 수요가 구조적으로 성장한다고 봄. 단기 채굴 수익성보다 HPC/클라우드 전환 속도를 본다. 3년 이상 보유.",
  ph_email:"이메일 주소",ph_mnews:"기사 제목과 본문 일부를 붙여넣어 주세요.",ph_mthesis:"이 뉴스와 대조할 투자 근거"
@@ -409,11 +409,11 @@ const T={ko:{
  ch_ratio:"Capital income is {p} of labor income",ch_achieved:"🎉 Grasshopper! Capital income now exceeds labor income",
  ch_share:"Share result",ch_cta:"→ Check your stock news too",ch_share_copied:"Copied a share message!",ch_share_txt:"[Needle] I'm a {title}! Capital income is {p} of labor income · what's yours?",ph_inc:"e.g. 50000000 (numbers ok)",
  wl_h:"Get an auto-briefing every morning",wl_p:"The full version auto-analyzes your saved stocks each morning and sends one email with only verified, essential news. Reserve now and start with your first month free.",
- wl_btn:"Start — first month free",wl_consent:"After the free first month, ₩9,900/mo auto-renews · I agree to share my email for the launch notice.",
+ wl_btn:"Start — first month free",wl_consent:"₩9,900/mo (first month free) planned at launch · I agree to share my email for the launch notice.",
  nav_watch:"Briefing",nav_manual:"Check news",nav_char:"Character",nav_pre:"Preorder",
  fl_name:"Vote on name",fl_fb:"Send feedback",
- pre_now:"First month free",pre_badge:"Early bird",pre_sub:"Then ₩9,900/mo · cancel anytime",hc_th_label:"📜 My thesis",
- wl_need_email:"Enter a valid email.",wl_need_consent:"Please check the auto-renew & email consent box.",wl_done:"✓ Reserved! We'll let you start first — with your first month free — at launch.",
+ pre_now:"First month free",pre_badge:"Early bird",pre_sub:"Then ₩9,900/mo (planned) · billing only with separate consent at launch · cancel anytime",hc_th_label:"📜 My thesis",
+ wl_need_email:"Enter a valid email.",wl_need_consent:"Please check the email consent box.",wl_done:"✓ Reserved! We'll let you start first — with your first month free — at launch.",
  foot:"Filter the noise, catch only what moves fundamentals · © 2026 Needle. Beta.<br>All content is for information only — not advice. Email used only for launch notices.",
  ph_stock:"e.g. NVDA, IREN, NVIDIA",ph_thesis:"e.g. Structural growth in AI datacenter power demand. I watch the HPC/cloud pivot, not short-term mining margins. Hold 3y+.",
  ph_email:"Email address",ph_mnews:"Paste the article title and part of the body.",ph_mthesis:"The thesis to compare this news against"
